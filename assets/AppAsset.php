@@ -31,6 +31,7 @@ class AppAsset extends AssetBundle
         'js/jquery.scrollbar.min.js',
         'js/owl.carousel.min.js',
 	    'js/common.js',
+	    'js/getFilmByDate.js',
     ];
     public $depends = [
     ];

@@ -23,12 +23,12 @@ use app\components\slider;
             <div class="f-slider">
                 <div class="carousel">
                     <?php
-                        foreach ($films as $film) {
+                        foreach ($filmsNosessions as $filmsNosession) {
                             echo "<div class='poster'>
                                     <a class='hov-poster' href='#'>
-                                        <img class='poster-img' src='" . $film['picture'] . "'>
-                                        <span class='film-cap'>" . $film['genre'] . "</span>
-                                        <span class='film-name'>" . $film['title'] . "</span>
+                                        <img class='poster-img' src='" . $filmsNosession['picture'] . "'>
+                                        <span class='film-cap'>" . $filmsNosession['genre'] . "</span>
+                                        <span class='film-name'>" . $filmsNosession['title'] . "</span>
                                     </a>                          
                                 </div>";
                         }?>
@@ -39,10 +39,10 @@ use app\components\slider;
             <div class="col-md-7">
                 <div class="dateline">
                     <ul>
-                        <a class="d-active" href="#"><li><span class="month"><?= \app\controllers\rus_date('F') ?></span><span class="date"><?= date('d') ?></span><span class="dayweek"><?= \app\controllers\rus_date('l') ?></span></li></a>
+                        <a class="get-date d-active" date="<?= date('Y-m-d',(time()+3600*24*$i)) ?>"><li><span class="month"><?= \app\controllers\rus_date('F') ?></span><span class="date"><?= date('d') ?></span><span class="dayweek"><?= \app\controllers\rus_date('l') ?></span></li></a>
                         <?php
                             for($i=1;$i<=6;$i++) {
-                                echo '<a href="#"><li><span class="date">' . date("d", (time()+3600*24*$i)) . '</span><span class="dayweek">' . \app\controllers\rus_date("l", (time()+3600*24*$i)) . '</span></li></a>';
+                                echo '<a class="get-date" date="' . date('Y-m-d', (time()+3600*24*$i)) . '"><li><span class="date">' . date("d", (time()+3600*24*$i)) . '</span><span class="dayweek">' . \app\controllers\rus_date("l", (time()+3600*24*$i)) . '</span></li></a>';
                             }
                         ?>
                     </ul>
@@ -55,7 +55,7 @@ use app\components\slider;
                     </div>
                     <div class="sessions scrollbar-light">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="sesFilms col-md-12">
                             <?php
                                 foreach ($films as $film) {
                                     echo '
@@ -73,32 +73,31 @@ use app\components\slider;
                                                 <div class="right">
                                                     <h3>' . $film['title'] . '</h3>
                                                     <span class="genre">' . $film['genre'] . '</span>
-                                                    <img alt="Продолжительность" class="time" src="/img/ico-time.png"><span class="dur"> - ' . $film['duration'] . ' мин</span>
+                                                    <img alt="Продолжительность" class="time" src="img/ico-time.png"><span class="dur"> - ' . $film['duration'] . ' мин</span>
                                                     <ul class="stars">
-                                                        <li><a href="#"><img src="/img/star.png"></a></li>
-                                                        <li><a href="#"><img src="/img/star.png"></a></li>
-                                                        <li><a href="#"><img src="/img/star.png"></a></li>
-                                                        <li><a href="#"><img src="/img/star.png"></a></li>
-                                                        <li><a href="#"><img src="/img/star-gray.png"></a></li>
+                                                        <li><a href="#"><img src="img/star.png"></a></li>
+                                                        <li><a href="#"><img src="img/star.png"></a></li>
+                                                        <li><a href="#"><img src="img/star.png"></a></li>
+                                                        <li><a href="#"><img src="img/star.png"></a></li>
+                                                        <li><a href="#"><img src="img/star-gray.png"></a></li>
                                                     </ul>
                                                     <div class="s-time">
                                                         <div class="row">';
                                                             $sessions = $film->sessions;
-
                                                             foreach ($sessions as $session) {
-                                                                echo '<div class="col-md-4 col-xs-4">
+                                                                echo '<div class="session-date col-md-4 col-xs-4" date="' . $session['date'] . '">
                                                                     <ul class="timeline">
                                                                         <li class="start">' . date('H:i', strtotime($session['time'])) . '</li>
-                                                                        <li class="2d">250р<img src="/img/2d.png" alt="Формат 2D"></li>
+                                                                        <li class="2d">250р<img src="img/2d.png" alt="Формат 2D"></li>
                                                                         <li class="3d"></li>
-                                                                        <li class="vip">750р<img src="/img/vip.png" alt="VIP ложа"></li>
+                                                                        <li class="vip">750р<img src="img/vip.png" alt="VIP ложа"></li>
                                                                     </ul>
                                                                 </div>';
                                                             }
                                                     echo '</div>
                                                     </div>
                                                     <div class="s-btns">
-                                                        <a class="about" href="#"><img src="/img/lenta.png">о фильме</a><a class="buy" href="#"><img src="/img/ticket.png">заказать билет</a>
+                                                        <a class="about" href="#"><img src="img/lenta.png">о фильме</a><a class="buy" href="#"><img src="img/ticket.png">заказать билет</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,13 +114,13 @@ use app\components\slider;
                         <h3>События в кинотеатре</h3>
                         <div class="post">
                             <div class="add">
-                                <img src="/img/calendar.png"><span class="p-time">10.08.2016</span>
-                                <img src="/img/time.png"><span>13:20</span>
+                                <img src="img/calendar.png"><span class="p-time">10.08.2016</span>
+                                <img src="img/time.png"><span>13:20</span>
                             </div>
                             <a class="p-link-content" href="#">
                                 <section class="p-content">
                                     <h3>Выборг снова откроет фестиваль "Окно в Европу"</h3>
-                                    <img class="p-img" src="/img/p1.png">
+                                    <img class="p-img" src="img/p1.png">
                                     <p class="p-text">С 7 по 13 августа в Выборге пройдет XXII фестиваль российского кино «Окно в Европу».
                                         Торжественная церемония открытия состоится 7 августа в 19.00 в кинотеатре «Выборг Палас», планируется участие главы 47-го региона.</p>
                                 </section>
@@ -129,13 +128,13 @@ use app\components\slider;
                         </div>
                         <div class="post">
                             <div class="add">
-                                <img src="/img/calendar.png"><span class="p-time">10.08.2016</span>
-                                <img src="/img/time.png"><span>13:20</span>
+                                <img src="img/calendar.png"><span class="p-time">10.08.2016</span>
+                                <img src="img/time.png"><span>13:20</span>
                             </div>
                             <a class="p-link-content" href="#">
                                 <section class="p-content">
                                     <h3>Выборг снова откроет фестиваль "Окно в Европу"</h3>
-                                    <img class="p-img" src="/img/p1.png">
+                                    <img class="p-img" src="img/p1.png">
                                     <p class="p-text">С 7 по 13 августа в Выборге пройдет XXII фестиваль российского кино «Окно в Европу».
                                         Торжественная церемония открытия состоится 7 августа в 19.00 в кинотеатре «Выборг Палас», планируется участие главы 47-го региона.</p>
                                 </section>
@@ -143,13 +142,13 @@ use app\components\slider;
                         </div>
                         <div class="post">
                             <div class="add">
-                                <img src="/img/calendar.png"><span class="p-time">10.08.2016</span>
-                                <img src="/img/time.png"><span>13:20</span>
+                                <img src="img/calendar.png"><span class="p-time">10.08.2016</span>
+                                <img src="img/time.png"><span>13:20</span>
                             </div>
                             <a class="p-link-content" href="#">
                                 <section class="p-content">
                                     <h3>Выборг снова откроет фестиваль "Окно в Европу"</h3>
-                                    <img class="p-img" src="/img/p1.png">
+                                    <img class="p-img" src="img/p1.png">
                                     <p class="p-text">С 7 по 13 августа в Выборге пройдет XXII фестиваль российского кино «Окно в Европу».
                                         Торжественная церемония открытия состоится 7 августа в 19.00 в кинотеатре «Выборг Палас», планируется участие главы 47-го региона.</p>
                                 </section>
@@ -157,13 +156,13 @@ use app\components\slider;
                         </div>
                         <div class="post">
                             <div class="add">
-                                <img src="/img/calendar.png"><span class="p-time">10.08.2016</span>
-                                <img src="/img/time.png"><span>13:20</span>
+                                <img src="img/calendar.png"><span class="p-time">10.08.2016</span>
+                                <img src="img/time.png"><span>13:20</span>
                             </div>
                             <a class="p-link-content" href="#">
                                 <section class="p-content">
                                     <h3>Выборг снова откроет фестиваль "Окно в Европу"</h3>
-                                    <img class="p-img" src="/img/p1.png">
+                                    <img class="p-img" src="img/p1.png">
                                     <p class="p-text">С 7 по 13 августа в Выборге пройдет XXII фестиваль российского кино «Окно в Европу».
                                         Торжественная церемония открытия состоится 7 августа в 19.00 в кинотеатре «Выборг Палас», планируется участие главы 47-го региона.</p>
                                 </section>
@@ -189,20 +188,20 @@ use app\components\slider;
                     <div class="contacts">
                         <div class="row">
                             <div class="col-md-4">
-                                <h3 class="c-title">Мы находимся по адресу<img src="/img/metka.png"></h3>
+                                <h3 class="c-title">Мы находимся по адресу<img src="img/metka.png"></h3>
                                 <span>Ленинградская область, г. Выборг, ул. Крепостная 25</span>
                                 <span>Городской телефон: </span>
-                                <span><img src="/img/phone.png"> тел. 254-56</span><br>
+                                <span><img src="img/phone.png"> тел. 254-56</span><br>
                                 <span>Email: </span>
-                                <span><img src="/img/email.png"> vbgpalace@mail.ru</span>
+                                <span><img src="img/email.png"> vbgpalace@mail.ru</span>
                                 <div class="b1">
                                     <div class="row1">
-                                        <img src="/img/pic1.jpg">
-                                        <img src="/img/pic2.jpg">
+                                        <img src="img/pic1.jpg">
+                                        <img src="img/pic2.jpg">
                                     </div>
                                     <div class="row2">
-                                        <img src="/img/pic3.jpg">
-                                        <img src="/img/pic4.jpg">
+                                        <img src="img/pic3.jpg">
+                                        <img src="img/pic4.jpg">
                                     </div>
                                 </div>
                             </div>
@@ -229,27 +228,3 @@ use app\components\slider;
         </div>
     </div>
 </section>
-
-<?php
-$js = <<<JS
-    $('.slider-films').on('click', function(){
-        $('.slider-films').removeClass('b-active');
-        $(this).addClass('b-active');
-        
-        //AJAX!!!
-        var sliderFilms = $(this).text();
-        $.ajax({
-            data: {slFilm: sliderFilms},
-            type: 'GET',
-            success: function(res){
-                console.log(res);
-            },
-            error: function(){
-                alert('Error!');
-            }
-        })
-    });
-JS;
-
-$this->registerJs($js);
-?>

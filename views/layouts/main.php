@@ -36,10 +36,10 @@ ltAppAsset::register($this);
 			<div class="container">
 				<a class="hide-menu visible-xs" id="hm" href="#"><i class="fa fa-bars fa-3x" aria-hidden="true"></i></a>
 				<a class="hide-menu hidden-xs visible-xs" id="hc" href="#"><i class="fa fa-close fa-3x" aria-hidden="true"></i></a>
-				<a class="hidden-xs" href="#"><img class="logo" src="/img/logo.png" alt="Выборг Палас"></a>
+				<a class="hidden-xs" href="#"><img class="logo" src="img/logo.png" alt="Выборг Палас"></a>
 				<nav id="nn" class="hidden-xs">
-					<ul><a href="/site/index"><li>Главная</li></a>
-						<a href="/site/viewer"><li>Зрителям</li></a>
+					<ul><a href="index.php?r=site/index"><li>Главная</li></a>
+						<a href="index.php?r=site/viewer"><li>Зрителям</li></a>
 						<a href="#"><li>Кинотеатр</li></a>
 						<a href="#"><li>Сеансы</li></a>
 						<a href="#"><li>Контакты</li></a>
@@ -48,7 +48,7 @@ ltAppAsset::register($this);
 				<form id="search" class="visible-lg">
 					<input placeholder="Поиск..." class="input-search" type="text">
 					<button type="submit" id="btn-send"></button>
-					<a href="#" class="s-login"><img alt="Авторизация" src="/img/user.png"></a>
+					<a href="#" class="s-login"><img alt="Авторизация" src="img/user.png"></a>
 				</form>
 			</div>
 		</div>
@@ -105,9 +105,9 @@ ltAppAsset::register($this);
 				<div class="col-md-2">
 					<h3>ДЕРЖИТЕ С НАМИ СВЯЗЬ</h3>
 					<ul class="sc">
-						<a href="#"><li class="s-vk"><img src="/img/vk1.png">Следите за нами в ВК</li></a>
-						<a href="#"><li class="s-o"><img src="/img/o.png">в одноклассниках</li></a>
-						<a href="#"><li class="s-ins"><img src="/img/Ins.png">в инстаграмме</li></a>
+						<a href="#"><li class="s-vk"><img src="img/vk1.png">Следите за нами в ВК</li></a>
+						<a href="#"><li class="s-o"><img src="img/o.png">в одноклассниках</li></a>
+						<a href="#"><li class="s-ins"><img src="img/Ins.png">в инстаграмме</li></a>
 					</ul>
 				</div>
 				<div class="col-md-5">

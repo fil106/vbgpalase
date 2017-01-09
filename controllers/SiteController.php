@@ -62,14 +62,65 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $films = film::find()->all();
-        
-        $filmsNosessions = film::find()->innerJoinWith('sessions')->where('idFilm is not NULL')->all();
+        if(Yii::$app->request->isAjax) {
+            $films = film::find()->innerJoinWith('sessions')->where('sessions.date="' . $_GET['date'] . '"')->all();
 
+            foreach ($films as $film) {
+                $str .= '
+                    <div class="row flm">
+                        <div class="col-md-4 col-xs-4">
+                            <!--<div class="raiting">7.3</div>-->
+                            <div class="left">
+                                <div class="img">
+                                    <img src="' . $film['picture'] . '">
+                                    <a href="' . $film['trailer'] . '" class="tr"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-xs-8">
+                            <div class="right">
+                                <h3>' . $film['title'] . '</h3>
+                                <span class="genre">' . $film['genre'] . '</span>
+                                <img alt="Продолжительность" class="time" src="img/ico-time.png"><span class="dur"> - ' . $film['duration'] . ' мин</span>
+                                <ul class="stars">
+                                    <li><a href="#"><img src="img/star.png"></a></li>
+                                    <li><a href="#"><img src="img/star.png"></a></li>
+                                    <li><a href="#"><img src="img/star.png"></a></li>
+                                    <li><a href="#"><img src="img/star.png"></a></li>
+                                    <li><a href="#"><img src="img/star-gray.png"></a></li>
+                                </ul>
+                                <div class="s-time">
+                                    <div class="row">';
+                                    $sessions = $film->sessions;
+                                    foreach ($sessions as $session) {
+                                        $str .= '<div class="session-date col-md-4 col-xs-4" date="' . $session['date'] . '">
+                                                                    <ul class="timeline">
+                                                                        <li class="start">' . date('H:i', strtotime($session['time'])) . '</li>
+                                                                        <li class="2d">250р<img src="img/2d.png" alt="Формат 2D"></li>
+                                                                        <li class="3d"></li>
+                                                                        <li class="vip">750р<img src="img/vip.png" alt="VIP ложа"></li>
+                                                                    </ul>
+                                                                </div>';
+                                    }
+                                    $str .= '</div>
+                                                    </div>
+                                                    <div class="s-btns">
+                                                        <a class="about" href="#"><img src="img/lenta.png">о фильме</a><a class="buy" href="#"><img src="img/ticket.png">заказать билет</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>';
+            }
+            return $str;
+        }
+
+        $films = film::find()->innerJoinWith('sessions')->where('sessions.date="' . date('Y-m-d') . '"')->all();
+//
+        $filmsNosessions = film::find()->leftJoin('sessions', 'film.id=sessions.idFilm')->where('idFilm is NULL')->all();
+//
         return $this->render('index', compact('films', 'filmsNosessions'));
 
-
-//        print_r($allSessions);
+//        print_r($films);
     }
 
     /**

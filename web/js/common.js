@@ -70,7 +70,7 @@ $(document).ready(function() {
 		owl.owlCarousel({
 			items: 1,
 			singleItem: true,
-			autoPlay: 10000,
+			autoPlay: 3500,
 		});
 		owl.on("resized.owl.carousel", function (event) {
 			var $this = $(this);

@@ -1083,3 +1083,7 @@ input:hover, input:focus {
 .slider .owl-page:last-child {
 	margin-right: 0px;
 }
+
+.get-date {
+	cursor: pointer;
+}
